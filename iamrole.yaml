@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion:
+'2010-09-09'
+Description: AWS CloudFormation Template to create IAM Roles and Policies
+
+Parameters:
+  RoleName:
+     Description: The name of the IAM Role
+     Type: String
+
+PolicyName:
+  Description: The name of the IAM role
+  Type:String
+  Default:MyPolicy
+
+TrustedEntity:
+  Description: The trusted entity
+  Type: String
+  Default:"ec2.amazonaws.com"
+
+Resources:
+  MyIAMRole:
+  Type: AWS::IAM::Role
+  Properties:
+    RoleNAME: !Ref RoleName
+    AssumeRolePolicyDocument:
+    
+  
+'
