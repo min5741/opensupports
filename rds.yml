@@ -1,0 +1,60 @@
+AWSTemplateFormatVersion:
+'2010-09-09'
+Description: AWS Cloud Formation Template for RDS Instance
+
+Parameters:
+DBInstanceClass:
+  Description: The DB instance class 
+  Type: String
+  Default: db.t2.micro
+  AllowedValues:
+    :db.t2.micro
+    :db.t2.small
+    db.t2.medium
+  ConstantDescription: Must be a valid DB instance class
+DBName:
+  Description: The name of the database
+  Type:String
+  Default:mydatabase
+DBUsername:
+  Description:The database admin account username
+  Type:String
+  NoEcho:true
+DBPassword:
+  Description: The allocated storage for the DB instance
+  Type: Number
+  Default:20
+  Minvalue:20
+  Maxvalue:1024
+
+Resources:
+  MyDBInstance:
+  Type:AWS::RDS:DBInstance
+  Properties:
+    DBInstanceClass:
+  DBAllocatedStorage
+    Engine:mysql
+    EngineVersion:'8'
+    MasterUsername:
+  DBUsername:
+    MasterUserPassword:
+  DBPassword:
+    DBName:
+    BackupRententionPeriod:6
+    VPCSecurityGroups:
+ MyDBSecurityGroup:
+   Type: AWS::EC2::SecurityGroup
+   Properties: 
+     GroupDescription:Enable MySQL access
+     VpcId:
+     SecurityGroupIngress:
+       IpProtocol: tcp
+       FromPort:3306
+       ToPort:3306
+       CidrIp:0.0.0.0/0
+
+Outputs:
+  DBInstanceIdentifier:
+    Description:The DB instance identifier
+    Value: MyDBInstance
+  
